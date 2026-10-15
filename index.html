@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مسابقة أبطال TIMSS</title>
+<style>
+body{font-family:Tahoma,Arial,sans-serif;margin:0;background:#eef5ff;color:#172033}
+.wrap{max-width:760px;margin:auto;padding:20px}.hero{background:#123b7a;color:white;padding:28px;border-radius:0 0 28px 28px;text-align:center}
+.hero h1{color:#f6c453}.card{background:white;border-radius:22px;padding:22px;margin:18px 0;box-shadow:0 12px 28px #001a3a22}
+.hidden{display:none!important}.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:700;cursor:pointer}.primary{background:#f6c453}.secondary{background:#e7eef9}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{background:#f4f7fb;border:2px solid #d7e0ee;font-size:24px}.correct{background:#d8f5e3!important;border-color:#1f9d55!important}.wrong{background:#fde0e0!important;border-color:#d64545!important}
+.field{width:100%;padding:12px;border:2px solid #d7e0ee;border-radius:12px;margin-top:8px}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}
+table{width:100%;border-collapse:collapse;min-width:850px}th,td{padding:8px;border-bottom:1px solid #ddd;text-align:right}.scroll{overflow:auto}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="hero"><h1>مسابقة أبطال TIMSS</h1><div>الرياضيات – الأسبوع (1)</div></div>
+<div class="wrap">
+<section id="student">
+<div id="intro" class="card"><h2>جاهز للتحدي؟ 🏆</h2><button id="start" class="btn primary">ابدأ المسابقة</button></div>
+<div id="info" class="card hidden"><h2>بيانات الطالب</h2>
+<select id="className" class="field"><option value="">اختر الصف</option><option>4/1</option><option>4/2</option><option>4/3</option><option>4/4</option></select>
+<input id="studentName" class="field" placeholder="الاسم الرباعي"><p id="nameMsg" style="color:#b42318"></p>
+<button id="infoNext" class="btn primary" disabled>التالي</button></div>
+<div id="quiz" class="card hidden"><div id="counter"></div><small id="source"></small><h2 id="qText"></h2><div id="eq" style="font-size:32px;text-align:center;font-weight:bold"></div><div id="choices" class="grid"></div><div id="feedback"></div><div class="row" style="margin-top:16px"><button id="prev" class="btn secondary">السابق</button><button id="next" class="btn primary" disabled>التالي</button></div></div>
+<div id="result" class="card hidden"><h2>النتيجة</h2><div id="score" style="font-size:48px;font-weight:bold;text-align:center"></div><p id="summary"></p><p id="resultMsg"></p><button id="restart" class="btn primary">إعادة المسابقة</button></div>
+</section>
+
+<section id="admin" class="hidden">
+<div id="login" class="card"><h2>دخول إدارة النتائج</h2><input id="adminCode" type="password" class="field" placeholder="رمز الإدارة"><p id="adminErr" style="color:#b42318"></p><button id="adminLogin" class="btn primary">دخول</button></div>
+<div id="panel" class="hidden">
+<div class="card"><div class="row"><h2>نتائج الطلاب</h2><button id="logout" class="btn secondary">تسجيل خروج</button></div><p>عدد المحاولات: <b id="attempts">0</b> | متوسط الدرجة: <b id="avg">0</b> | 3/3: <b id="perfect">0</b></p></div>
+<div class="card"><div class="row"><select id="filterClass" class="field"><option value="">كل الصفوف</option><option>4/1</option><option>4/2</option><option>4/3</option><option>4/4</option></select><input id="fromDate" type="date" class="field"><input id="toDate" type="date" class="field"></div><button id="download" class="btn primary" style="margin-top:12px">تحميل ملف Excel</button></div>
+<div class="card scroll"><table><thead><tr><th>التاريخ</th><th>الاسم</th><th>الصف</th><th>الدرجة</th><th>س1</th><th>س2</th><th>س3</th></tr></thead><tbody id="tbody"></tbody></table></div>
+</div></section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+const CONFIG={SUPABASE_URL:"PUT_SUPABASE_URL_HERE",SUPABASE_ANON_KEY:"PUT_SUPABASE_ANON_KEY_HERE"};
+const qs=s=>document.querySelector(s);
+const Q=[
+{source:"الفصل الأول · السؤال 19",text:"أيُّ مما يلي هو عددٌ زوجي ومن مضاعفات العدد ٥؟",options:["٥٢","٤٠","٣٥","٥٥"],correct:1,explain:"العدد ٤٠ زوجي، وينتهي بصفر، لذلك هو أيضًا من مضاعفات العدد ٥."},
+{source:"الفصل الثاني · السؤال 9",text:"ما العدد المناسب الذي يجب وضعه في المربع كي تصبح الجملة العددية صحيحة؟",eq:"٣ + ٨ = □ + ٦",options:["١٧","١١","٧","٥"],correct:3,explain:"٣ + ٨ = ١١، ولذلك يجب أن يكون □ + ٦ = ١١، إذن □ = ٥."},
+{source:"الفصل الثاني · السؤال 11",text:"العدد الأقرب إلى ٦٧٥٣؟",options:["٦٨٠٠","٧٠٠٠","٦٧٥٠","٦٧٦٠"],correct:2,explain:"٦٧٥٣ يبعد ٣ فقط عن ٦٧٥٠، ولذلك ٦٧٥٠ هو الأقرب."}
+];
+let S={name:"",cls:"",i:0,a:[null,null,null],saved:false};
+function show(id){["intro","info","quiz","result"].forEach(x=>qs("#"+x).classList.add("hidden"));qs("#"+id).classList.remove("hidden")}
+qs("#start").onclick=()=>show("info");
+function valid(){let p=qs("#studentName").value.trim().split(/\s+/).filter(Boolean);let ok=qs("#className").value&&p.length>=4;qs("#infoNext").disabled=!ok;qs("#nameMsg").textContent=qs("#studentName").value&&p.length<4?"يرجى كتابة الاسم الرباعي.":""}
+qs("#studentName").oninput=valid;qs("#className").onchange=valid;
+qs("#infoNext").onclick=()=>{S.name=qs("#studentName").value.trim();S.cls=qs("#className").value;show("quiz");render()};
+function render(){let q=Q[S.i],a=S.a[S.i];qs("#counter").textContent=`السؤال ${S.i+1} / 3`;qs("#source").textContent=q.source;qs("#qText").textContent=q.text;qs("#eq").textContent=q.eq||"";qs("#choices").innerHTML="";
+q.options.forEach((o,i)=>{let b=document.createElement("button");b.className="btn choice";b.textContent=o;if(a!==null){b.disabled=true;if(i===q.correct)b.classList.add("correct");else if(i===a)b.classList.add("wrong")}b.onclick=()=>{if(S.a[S.i]===null){S.a[S.i]=i;render()}};qs("#choices").appendChild(b)});
+qs("#feedback").innerHTML=a===null?"":(a===q.correct?`<p style="color:#157347"><b>إجابة صحيحة</b><br>${q.explain}</p>`:`<p style="color:#b42318"><b>إجابتك غير صحيحة. الإجابة الصحيحة هي ${q.options[q.correct]}</b><br>${q.explain}</p>`);
+qs("#next").disabled=a===null;qs("#prev").disabled=S.i===0;qs("#next").textContent=S.i===2?"إنهاء":"التالي"}
+qs("#prev").onclick=()=>{if(S.i>0){S.i--;render()}};
+qs("#next").onclick=async()=>{if(S.i<2){S.i++;render()}else{await save();finish()}};
+async function save(){if(S.saved)return;S.saved=true;let score=S.a.reduce((t,a,i)=>t+(a===Q[i].correct?1:0),0);
+let p={student_name:S.name,class_name:S.cls,score,total:3,q1_answer:Q[0].options[S.a[0]],q1_correct:S.a[0]===Q[0].correct,q2_answer:Q[1].options[S.a[1]],q2_correct:S.a[1]===Q[1].correct,q3_answer:Q[2].options[S.a[2]],q3_correct:S.a[2]===Q[2].correct};
+await fetch(CONFIG.SUPABASE_URL+"/rest/v1/student_results",{method:"POST",headers:{apikey:CONFIG.SUPABASE_ANON_KEY,Authorization:"Bearer "+CONFIG.SUPABASE_ANON_KEY,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(p)}).catch(()=>{})}
+function finish(){let sc=S.a.reduce((t,a,i)=>t+(a===Q[i].correct?1:0),0);show("result");qs("#score").textContent=sc+" / 3";qs("#summary").textContent=S.name+" – الصف "+S.cls;qs("#resultMsg").textContent=sc===3?"ممتاز! حققت العلامة الكاملة.":sc===2?"رائع جدًا! إجابتان صحيحتان من ثلاث.":"محاولة جيدة، أعد التحدي لتحقق نتيجة أفضل."}
+qs("#restart").onclick=()=>{S={name:"",cls:"",i:0,a:[null,null,null],saved:false};qs("#studentName").value="";qs("#className").value="";show("intro")};
+
+let rows=[],filtered=[];
+if(new URLSearchParams(location.search).get("admin")==="results"){qs("#student").classList.add("hidden");qs("#admin").classList.remove("hidden")}
+qs("#adminLogin").onclick=async()=>{qs("#adminErr").textContent="";let code=qs("#adminCode").value;
+try{let r=await fetch(CONFIG.SUPABASE_URL+"/functions/v1/admin-results",{method:"POST",headers:{"Content-Type":"application/json",apikey:CONFIG.SUPABASE_ANON_KEY,Authorization:"Bearer "+CONFIG.SUPABASE_ANON_KEY},body:JSON.stringify({code})});if(!r.ok)throw 0;rows=await r.json();qs("#login").classList.add("hidden");qs("#panel").classList.remove("hidden");apply()}catch{qs("#adminErr").textContent="رمز الإدارة غير صحيح أو تعذر تحميل النتائج."}};
+["filterClass","fromDate","toDate"].forEach(id=>qs("#"+id).onchange=apply);
+function apply(){let c=qs("#filterClass").value,f=qs("#fromDate").value,t=qs("#toDate").value;filtered=rows.filter(r=>(!c||r.class_name===c)&&(!f||new Date(r.created_at)>=new Date(f+"T00:00:00"))&&(!t||new Date(r.created_at)<=new Date(t+"T23:59:59")));qs("#attempts").textContent=filtered.length;qs("#avg").textContent=filtered.length?(filtered.reduce((a,r)=>a+r.score,0)/filtered.length).toFixed(2):"0";qs("#perfect").textContent=filtered.filter(r=>r.score===3).length;qs("#tbody").innerHTML=filtered.map(r=>`<tr><td>${new Date(r.created_at).toLocaleString("ar-BH")}</td><td>${r.student_name}</td><td>${r.class_name}</td><td>${r.score}/${r.total||3}</td><td>${r.q1_answer||"—"} ${r.q1_correct?"✓":"✗"}</td><td>${r.q2_answer||"—"} ${r.q2_correct?"✓":"✗"}</td><td>${r.q3_answer||"—"} ${r.q3_correct?"✓":"✗"}</td></tr>`).join("")}
+qs("#download").onclick=()=>{let d=filtered.map(r=>({"التاريخ والوقت":new Date(r.created_at).toLocaleString("ar-BH"),"اسم الطالب":r.student_name,"الصف":r.class_name,"الدرجة":r.score,"من أصل":r.total||3,"إجابة السؤال 1":r.q1_answer,"صحة السؤال 1":r.q1_correct?"صحيحة":"خاطئة","إجابة السؤال 2":r.q2_answer,"صحة السؤال 2":r.q2_correct?"صحيحة":"خاطئة","إجابة السؤال 3":r.q3_answer,"صحة السؤال 3":r.q3_correct?"صحيحة":"خاطئة"}));let ws=XLSX.utils.json_to_sheet(d),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"النتائج");XLSX.writeFile(wb,"TIMSS_نتائج_الطلاب_"+new Date().toISOString().slice(0,10)+".xlsx")};
+qs("#logout").onclick=()=>location.reload();
+</script>
+</body></html>
