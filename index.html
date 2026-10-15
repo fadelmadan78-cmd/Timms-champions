@@ -61,7 +61,7 @@ qs("#prev").onclick=()=>{if(S.i>0){S.i--;render()}};
 qs("#next").onclick=async()=>{if(S.i<2){S.i++;render()}else{await save();finish()}};
 async function save(){if(S.saved)return;S.saved=true;let score=S.a.reduce((t,a,i)=>t+(a===Q[i].correct?1:0),0);
 let p={student_name:S.name,class_name:S.cls,score,total:3,q1_answer:Q[0].options[S.a[0]],q1_correct:S.a[0]===Q[0].correct,q2_answer:Q[1].options[S.a[1]],q2_correct:S.a[1]===Q[1].correct,q3_answer:Q[2].options[S.a[2]],q3_correct:S.a[2]===Q[2].correct};
-await fetch(CONFIG.SUPABASE_URL+"/rest/v1/student_results",{method:"POST",headers:{apikey:CONFIG.SUPABASE_ANON_KEY,Authorization:"Bearer "+CONFIG.SUPABASE_ANON_KEY,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(p)}).catch(()=>{})}
+await fetch(CONFIG.SUPABASE_URL+"/rest/v1/student_results",{method:"POST",headers:{apikey:CONFIG.SUPABASE_ANON_KEY,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(p)}).catch(()=>{})}
 function finish(){let sc=S.a.reduce((t,a,i)=>t+(a===Q[i].correct?1:0),0);show("result");qs("#score").textContent=sc+" / 3";qs("#summary").textContent=S.name+" – الصف "+S.cls;qs("#resultMsg").textContent=sc===3?"ممتاز! حققت العلامة الكاملة.":sc===2?"رائع جدًا! إجابتان صحيحتان من ثلاث.":"محاولة جيدة، أعد التحدي لتحقق نتيجة أفضل."}
 qs("#restart").onclick=()=>{S={name:"",cls:"",i:0,a:[null,null,null],saved:false};qs("#studentName").value="";qs("#className").value="";show("intro")};
 
