@@ -52,7 +52,45 @@ function show(id){["intro","info","quiz","result"].forEach(x=>qs("#"+x).classLis
 qs("#start").onclick=()=>show("info");
 function valid(){let p=qs("#studentName").value.trim().split(/\s+/).filter(Boolean);let ok=qs("#className").value&&p.length>=4;qs("#infoNext").disabled=!ok;qs("#nameMsg").textContent=qs("#studentName").value&&p.length<4?"يرجى كتابة الاسم الرباعي.":""}
 qs("#studentName").oninput=valid;qs("#className").onchange=valid;
-qs("#infoNext").onclick=()=>{S.name=qs("#studentName").value.trim();S.cls=qs("#className").value;show("quiz");render()};
+qs("#infoNext").onclick=async()=>{
+  S.name=qs("#studentName").value.trim();
+  S.cls=qs("#className").value;
+
+  try{
+    const r=await fetch(
+      CONFIG.SUPABASE_URL+"/functions/v1/check-student",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          apikey:CONFIG.SUPABASE_ANON_KEY
+        },
+        body:JSON.stringify({
+          student_name:S.name,
+          class_name:S.cls
+        })
+      }
+    );
+
+    if(!r.ok){
+      alert("تعذر التحقق من المشاركة. حاول مرة أخرى.");
+      return;
+    }
+
+    const data=await r.json();
+
+    if(data.exists){
+      alert("لقد شاركت في المسابقة مسبقًا، ولا يسمح بأكثر من محاولة.");
+      return;
+    }
+
+    show("quiz");
+    render();
+
+  }catch(e){
+    alert("تعذر الاتصال بالنظام. حاول مرة أخرى.");
+  }
+};
 function render(){let q=Q[S.i],a=S.a[S.i];qs("#counter").textContent=`السؤال ${S.i+1} / 3`;qs("#source").textContent=q.source;qs("#qText").textContent=q.text;qs("#eq").textContent=q.eq||"";qs("#choices").innerHTML="";
 q.options.forEach((o,i)=>{let b=document.createElement("button");b.className="btn choice";b.textContent=o;if(a!==null){b.disabled=true;if(i===q.correct)b.classList.add("correct");else if(i===a)b.classList.add("wrong")}b.onclick=()=>{if(S.a[S.i]===null){S.a[S.i]=i;render()}};qs("#choices").appendChild(b)});
 qs("#feedback").innerHTML=a===null?"":(a===q.correct?`<p style="color:#157347"><b>إجابة صحيحة</b><br>${q.explain}</p>`:`<p style="color:#b42318"><b>إجابتك غير صحيحة. الإجابة الصحيحة هي ${q.options[q.correct]}</b><br>${q.explain}</p>`);
