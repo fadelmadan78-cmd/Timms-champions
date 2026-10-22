@@ -131,7 +131,17 @@ qs("#adminLogin").onclick=async()=>{qs("#adminErr").textContent="";let code=qs("
 try{let r=await fetch(CONFIG.SUPABASE_URL+"/functions/v1/admin-results",{method:"POST",headers:{"Content-Type":"application/json",apikey:CONFIG.SUPABASE_ANON_KEY,Authorization:"Bearer "+CONFIG.SUPABASE_ANON_KEY},body:JSON.stringify({code})});if(!r.ok)throw 0;rows=await r.json();qs("#login").classList.add("hidden");qs("#panel").classList.remove("hidden");apply()}catch{qs("#adminErr").textContent="رمز الإدارة غير صحيح أو تعذر تحميل النتائج."}};
 ["filterClass","fromDate","toDate"].forEach(id=>qs("#"+id).onchange=apply);
 function apply(){let c=qs("#filterClass").value,f=qs("#fromDate").value,t=qs("#toDate").value;filtered=rows.filter(r=>(!c||r.class_name===c)&&(!f||new Date(r.created_at)>=new Date(f+"T00:00:00"))&&(!t||new Date(r.created_at)<=new Date(t+"T23:59:59")));qs("#attempts").textContent=filtered.length;qs("#avg").textContent=filtered.length?(filtered.reduce((a,r)=>a+r.score,0)/filtered.length).toFixed(2):"0";qs("#perfect").textContent=filtered.filter(r=>r.score===3).length;qs("#tbody").innerHTML=filtered.map(r=>`<tr><td>${new Date(r.created_at).toLocaleString("ar-BH")}</td><td>${r.student_name}</td><td>${r.class_name}</td><td>${r.score}/${r.total||3}</td><td>${r.q1_answer||"—"} ${r.q1_correct?"✓":"✗"}</td><td>${r.q2_answer||"—"} ${r.q2_correct?"✓":"✗"}</td><td>${r.q3_answer||"—"} ${r.q3_correct?"✓":"✗"}</td></tr>`).join("")}
-qs("#download").onclick=()=>{let d=filtered.map(r=>({"التاريخ والوقت":new Date(r.created_at).toLocaleString("ar-BH"),"اسم الطالب":r.student_name,"الصف":r.class_name,"الدرجة":r.score,"من أصل":r.total||3,"إجابة السؤال 1":r.q1_answer,"صحة السؤال 1":r.q1_correct?"صحيحة":"خاطئة","إجابة السؤال 2":r.q2_answer,"صحة السؤال 2":r.q2_correct?"صحيحة":"خاطئة","إجابة السؤال 3":r.q3_answer,"صحة السؤال 3":r.q3_correct?"صحيحة":"خاطئة"}));let ws=XLSX.utils.json_to_sheet(d),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"النتائج");XLSX.writeFile(wb,"TIMSS_نتائج_الطلاب_"+new Date().toISOString().slice(0,10)+".xlsx")};
+qs("#download").onclick=()=>{let d=filtered.map(r=>({"التاريخ والوقت":new Date(r.created_at).toLocaleString("ar-BH"),"اسم الطالب":r.student_name,"الصف":r.class_name,"الدرجة":r.score,"من أصل":r.total||3,"إجابة السؤال 1":r.q1_answer,"صحة السؤال 1":r.q1_correct?"صحيحة":"خاطئة","إجابة السؤال 2":r.q2_answer,"صحة السؤال 2":r.q2_correct?"صحيحة":"خاطئة","إجابة السؤال 3":r.q3_answer,"صحة السؤال 3":r.q3_correct?"صحيحة":"خاطئة","صحة السؤال 3":r.q3_correct?"صحيحة":"خاطئة",
+
+"إجابة السؤال 4":r.q4_answer,
+"صحة السؤال 4":r.q4_correct?"صحيحة":"خاطئة",
+
+"إجابة السؤال 5":r.q5_answer,
+"صحة السؤال 5":r.q5_correct?"صحيحة":"خاطئة",
+
+"إجابة السؤال 6":r.q6_answer,
+"صحة السؤال 6":r.q6_correct?"صحيحة":"خاطئة"}));
+let ws=XLSX.utils.json_to_sheet(d),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"النتائج");XLSX.writeFile(wb,"TIMSS_نتائج_الطلاب_"+new Date().toISOString().slice(0,10)+".xlsx")};
 qs("#logout").onclick=()=>location.reload();
 </script>
 </body></html>
