@@ -12,12 +12,137 @@ body{font-family:Tahoma,Arial,sans-serif;margin:0;background:#eef5ff;color:#1720
 .field{width:100%;padding:12px;border:2px solid #d7e0ee;border-radius:12px;margin-top:8px}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}
 table{width:100%;border-collapse:collapse;min-width:850px}th,td{padding:8px;border-bottom:1px solid #ddd;text-align:right}.scroll{overflow:auto}
 @media(max-width:560px){.grid{grid-template-columns:1fr}}
+
+:root{
+  --navy:#082b68;
+  --blue:#0f4ea8;
+  --gold:#ffbf2f;
+  --gold2:#ff9f0a;
+}
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(72,171,255,.16),transparent 28%),
+    radial-gradient(circle at 85% 5%,rgba(83,111,255,.13),transparent 26%),
+    #eef5ff;
+}
+.space-hero{
+  min-height:460px;
+  background:
+    linear-gradient(90deg,rgba(2,19,57,.20),rgba(2,19,57,.08)),
+    url("timss-space-hero.png") center/cover no-repeat;
+  border-radius:0 0 34px 34px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 18px 45px rgba(1,25,66,.22);
+}
+.space-overlay{
+  min-height:460px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding-top:42px;
+}
+.space-title{
+  text-align:center;
+  color:white;
+  text-shadow:0 3px 14px rgba(0,0,0,.25);
+}
+.space-title h1{
+  margin:0;
+  font-size:clamp(32px,5vw,64px);
+  color:#ffd15c;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+.space-subtitle{
+  display:inline-block;
+  margin-top:12px;
+  padding:10px 20px;
+  border-radius:999px;
+  background:rgba(6,43,108,.78);
+  border:1px solid rgba(255,255,255,.25);
+  font-weight:800;
+  font-size:clamp(16px,2vw,24px);
+  backdrop-filter:blur(6px);
+}
+.crown{font-size:38px;margin-bottom:4px}
+.wrap{max-width:900px}
+.launch-card{
+  max-width:680px;
+  margin:-92px auto 26px;
+  position:relative;
+  z-index:3;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:28px;
+  padding:30px 28px;
+  text-align:center;
+  box-shadow:0 24px 55px rgba(0,31,83,.20);
+}
+.launch-card h2{
+  margin:4px 0 10px;
+  font-size:clamp(28px,4vw,42px);
+  color:#0b2e6f;
+}
+.launch-card p{
+  margin:0 auto 22px;
+  color:#4d5d79;
+  font-size:18px;
+  line-height:1.8;
+}
+.launch-badge{
+  width:62px;height:62px;
+  border-radius:20px;
+  display:grid;place-items:center;
+  margin:-62px auto 10px;
+  font-size:34px;
+  background:linear-gradient(180deg,#fff8d8,#fff);
+  box-shadow:0 10px 24px rgba(255,177,0,.25);
+  border:2px solid #ffe18a;
+}
+.launch-btn{
+  min-width:280px;
+  padding:16px 28px;
+  font-size:22px;
+  color:#0a2d6e;
+  background:linear-gradient(180deg,#ffd764,#ffb31f);
+  border:2px solid #ffd45a;
+  box-shadow:0 8px 0 #db8d00,0 16px 28px rgba(255,166,0,.26);
+  transition:.2s ease;
+}
+.launch-btn:hover{transform:translateY(-2px)}
+.launch-btn:active{transform:translateY(3px);box-shadow:0 5px 0 #db8d00}
+#info,#quiz,#result,#admin .card{
+  border:1px solid rgba(28,75,147,.08);
+}
+@media(max-width:700px){
+  .space-hero{min-height:390px;background-position:35% center}
+  .space-overlay{min-height:390px;padding-top:24px}
+  .launch-card{margin:-64px 12px 20px;padding:26px 18px}
+  .launch-btn{min-width:0;width:100%}
+}
+
 </style>
 </head>
 <body>
-<div class="hero"><h1>مسابقة أبطال TIMSS</h1><div>الرياضيات والعلوم – الأسبوع (1)</div></div><div class="wrap">
+<div class="space-hero">
+  <div class="space-overlay">
+    <div class="space-title">
+      <div class="crown">👑</div>
+      <h1>مسابقة أبطال TIMSS</h1>
+      <div class="space-subtitle">الرياضيات والعلوم – الأسبوع (2)</div>
+    </div>
+  </div>
+</div>
+<div class="wrap">
 <section id="student">
-<div id="intro" class="card"><h2>جاهز للتحدي؟ 🏆</h2><button id="start" class="btn primary">ابدأ المسابقة</button></div>
+<div id="intro" class="launch-card">
+  <div class="launch-badge">🏆</div>
+  <h2>جاهز للتحليق في فضاء TIMSS؟</h2>
+  <p>انطلق في رحلة مليئة بالتحدي والاكتشاف في الرياضيات والعلوم.</p>
+  <button id="start" class="btn launch-btn">🚀 ابدأ المسابقة</button>
+</div>
 <div id="info" class="card hidden"><h2>بيانات الطالب</h2>
 <select id="className" class="field"><option value="">اختر الصف</option><option>4/1</option><option>4/2</option><option>4/3</option><option>4/4</option></select>
 <input id="studentName" class="field" placeholder="الاسم الرباعي"><p id="nameMsg" style="color:#b42318"></p>
@@ -25,6 +150,7 @@ table{width:100%;border-collapse:collapse;min-width:850px}th,td{padding:8px;bord
 <div id="quiz" class="card hidden"><div id="counter"></div><small id="source"></small><h2 id="qText"></h2><div id="eq" style="font-size:32px;text-align:center;font-weight:bold"></div><div id="choices" class="grid"></div><div id="feedback"></div><div class="row" style="margin-top:16px"><button id="prev" class="btn secondary">السابق</button><button id="next" class="btn primary" disabled>التالي</button></div></div>
 <div id="result" class="card hidden"><h2>النتيجة</h2><div id="score" style="font-size:48px;font-weight:bold;text-align:center"></div><p id="summary"></p><p id="resultMsg"></p><button id="restart" class="btn primary">إعادة المسابقة</button></div>
 </section>
+
 <section id="admin" class="hidden">
 <div id="login" class="card"><h2>دخول إدارة النتائج</h2><input id="adminCode" type="password" class="field" placeholder="رمز الإدارة"><p id="adminErr" style="color:#b42318"></p><button id="adminLogin" class="btn primary">دخول</button></div>
 <div id="panel" class="hidden">
