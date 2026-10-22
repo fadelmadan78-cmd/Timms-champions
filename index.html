@@ -149,7 +149,7 @@ qs("#infoNext").onclick=async()=>{
 function render(){let q=Q[S.i],a=S.a[S.i];qs("#counter").textContent=`السؤال ${S.i+1} / 6`;qs("#source").textContent=q.source;qs("#qText").textContent=q.text;qs("#eq").textContent=q.eq||"";qs("#choices").innerHTML="";
 q.options.forEach((o,i)=>{let b=document.createElement("button");b.className="btn choice";b.textContent=o;if(a!==null){b.disabled=true;if(i===q.correct)b.classList.add("correct");else if(i===a)b.classList.add("wrong")}b.onclick=()=>{if(S.a[S.i]===null){S.a[S.i]=i;render()}};qs("#choices").appendChild(b)});
 qs("#feedback").innerHTML=a===null?"":(a===q.correct?`<p style="color:#157347"><b>إجابة صحيحة</b><br>${q.explain}</p>`:`<p style="color:#b42318"><b>إجابتك غير صحيحة. الإجابة الصحيحة هي ${q.options[q.correct]}</b><br>${q.explain}</p>`);
-qs("#next").disabled=a===null;qs("#prev").disabled=S.i===0;qs("#next").textContent=S.i===2?"إنهاء":"التالي"}
+qs("#next").disabled=a===null;qs("#prev").disabled=S.i===0;qs("#next").textContent=S.i===Q.length-1?"إنهاء":"التالي"}
 qs("#prev").onclick=()=>{if(S.i>0){S.i--;render()}};
 qs("#next").onclick=async()=>{
   if(S.i < Q.length-1){
