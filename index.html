@@ -301,6 +301,7 @@ qs("#tbody").innerHTML=filtered.map(r=>`
 <td>${r.q6_answer||"—"} ${r.q6_correct?"✓":"✗"}</td>
 </tr>
 `).join("");
+                }
 qs("#download").onclick=()=>{let d=filtered.map(r=>({"التاريخ والوقت":new Date(r.created_at).toLocaleString("ar-BH"),"اسم الطالب":r.student_name,"الصف":r.class_name,"الدرجة":r.score,"من أصل":r.total||6,"إجابة السؤال 1":r.q1_answer,"صحة السؤال 1":r.q1_correct?"صحيحة":"خاطئة","إجابة السؤال 2":r.q2_answer,"صحة السؤال 2":r.q2_correct?"صحيحة":"خاطئة","إجابة السؤال 3":r.q3_answer,"صحة السؤال 3":r.q3_correct?"صحيحة":"خاطئة",
 
 "إجابة السؤال 4":r.q4_answer,
