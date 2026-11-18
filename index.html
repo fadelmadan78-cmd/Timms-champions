@@ -908,6 +908,7 @@ qs("#restart").onclick=()=>{
 
 let oldRows=[];
 let newRows=[];
+let thirdRows=[];
 let rows=[];
 let filtered=[];
 let activeCompetition="old";
@@ -977,6 +978,9 @@ qs("#adminLogin").onclick=async()=>{
     newRows=
       data.new_results||[];
 
+    thirdRows=
+      data.third_results||[];
+
     rows=oldRows;
 
 
@@ -1028,6 +1032,13 @@ qs("#adminLogin").onclick=async()=>{
             مسابقة TIMSS الجديدة
           </button>
 
+          <button
+            id="thirdTab"
+            class="btn secondary"
+          >
+            مسابقة أبطال TIMSS (3)
+          </button>
+
         </div>
 
       `;
@@ -1043,6 +1054,9 @@ qs("#adminLogin").onclick=async()=>{
 
       qs("#newTab").onclick=
         ()=>setCompetition("new");
+
+      qs("#thirdTab").onclick=
+        ()=>setCompetition("third");
 
     }
 
@@ -1065,34 +1079,28 @@ function setCompetition(type){
 
   activeCompetition=type;
 
-
   if(type==="old"){
-
     rows=oldRows;
-
-    qs("#oldTab").className=
-      "btn primary";
-
-    qs("#newTab").className=
-      "btn secondary";
-
-  }else{
-
+  }
+  else if(type==="new"){
     rows=newRows;
-
-    qs("#oldTab").className=
-      "btn secondary";
-
-    qs("#newTab").className=
-      "btn primary";
-
+  }
+  else{
+    rows=thirdRows;
   }
 
+  qs("#oldTab").className=
+    "btn "+(type==="old"?"primary":"secondary");
+
+  qs("#newTab").className=
+    "btn "+(type==="new"?"primary":"secondary");
+
+  qs("#thirdTab").className=
+    "btn "+(type==="third"?"primary":"secondary");
 
   apply();
 
 }
-
 
 
 [
@@ -1387,10 +1395,12 @@ qs("#download").onclick=()=>{
   const prefix=
 
     activeCompetition==="old"
-
       ?"TIMSS_نتائج_المسابقة_السابقة_"
 
-      :"TIMSS_نتائج_المسابقة_الجديدة_";
+    :activeCompetition==="new"
+      ?"TIMSS_نتائج_المسابقة_الجديدة_"
+
+      :"TIMSS_نتائج_مسابقة_أبطال_TIMSS_3_";
 
 
   XLSX.writeFile(
