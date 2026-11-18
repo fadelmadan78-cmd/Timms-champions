@@ -7,23 +7,19 @@
 
 <style>
 *{box-sizing:border-box}
-
 body{
   font-family:Tahoma,Arial,sans-serif;
   margin:0;
   background:#eef5ff;
   color:#172033;
 }
-
 :root{
   --navy:#082b68;
   --blue:#0f4ea8;
   --gold:#ffbf2f;
-  --gold2:#ff9f0a;
   --green:#16834b;
   --red:#c83535;
 }
-
 .space-hero{
   min-height:440px;
   background:
@@ -34,7 +30,6 @@ body{
   overflow:hidden;
   box-shadow:0 18px 45px rgba(1,25,66,.22);
 }
-
 .space-overlay{
   min-height:440px;
   display:flex;
@@ -42,20 +37,17 @@ body{
   align-items:flex-start;
   padding-top:36px;
 }
-
 .space-title{
   text-align:center;
   color:white;
   text-shadow:0 3px 14px rgba(0,0,0,.3);
 }
-
 .space-title h1{
   margin:0;
   font-size:clamp(30px,5vw,58px);
   color:#ffd15c;
   font-weight:900;
 }
-
 .space-subtitle{
   display:inline-block;
   margin-top:13px;
@@ -66,15 +58,8 @@ body{
   font-weight:800;
   font-size:clamp(16px,2vw,22px);
 }
-
 .crown{font-size:38px}
-
-.wrap{
-  max-width:900px;
-  margin:auto;
-  padding:20px;
-}
-
+.wrap{max-width:900px;margin:auto;padding:20px}
 .card{
   background:white;
   border-radius:24px;
@@ -83,7 +68,6 @@ body{
   box-shadow:0 14px 32px rgba(0,31,83,.13);
   border:1px solid rgba(28,75,147,.08);
 }
-
 .launch-card{
   max-width:700px;
   margin:-88px auto 28px;
@@ -95,187 +79,161 @@ body{
   text-align:center;
   box-shadow:0 24px 55px rgba(0,31,83,.20);
 }
-
 .launch-card h2{
   color:#0b2e6f;
   font-size:clamp(27px,4vw,40px);
   margin:5px 0 10px;
 }
-
 .launch-card p{
   color:#56647c;
   font-size:18px;
   line-height:1.8;
 }
-
 .launch-badge{
-  width:66px;
-  height:66px;
-  border-radius:20px;
-  display:grid;
-  place-items:center;
+  width:66px;height:66px;border-radius:20px;
+  display:grid;place-items:center;
   margin:-64px auto 12px;
-  font-size:35px;
-  background:#fff8d8;
+  font-size:35px;background:#fff8d8;
   border:2px solid #ffe18a;
 }
-
 .btn{
-  border:0;
-  border-radius:14px;
-  padding:13px 20px;
-  font-weight:800;
-  cursor:pointer;
-  font-size:17px;
+  border:0;border-radius:14px;padding:13px 20px;
+  font-weight:800;cursor:pointer;font-size:17px;
 }
-
 .primary{
   background:linear-gradient(180deg,#ffd764,#ffb31f);
   color:#082b68;
 }
-
-.secondary{
-  background:#e7eef9;
-  color:#173d77;
-}
-
+.secondary{background:#e7eef9;color:#173d77}
 .launch-btn{
-  min-width:280px;
-  padding:16px 30px;
-  font-size:22px;
+  min-width:280px;padding:16px 30px;font-size:22px;
   box-shadow:0 7px 0 #d58c00;
 }
-
 .hidden{display:none!important}
-
 .field{
-  width:100%;
-  padding:13px;
-  border:2px solid #d7e0ee;
-  border-radius:12px;
-  margin-top:9px;
-  font-size:17px;
-  background:white;
+  width:100%;padding:13px;border:2px solid #d7e0ee;
+  border-radius:12px;margin-top:9px;font-size:17px;background:white;
 }
-
-.row{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:18px;
-}
-
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
 .row>*{flex:1}
-
 .subject-badge{
-  display:inline-block;
-  padding:7px 15px;
-  border-radius:999px;
-  color:white;
-  font-weight:bold;
-  margin-bottom:8px;
+  display:inline-block;padding:7px 15px;border-radius:999px;
+  color:white;font-weight:bold;margin-bottom:8px;
 }
-
 .math{background:#135fc0}
 .science{background:#149257}
-
-#counter{
-  color:#63728b;
-  font-weight:bold;
-  margin-bottom:8px;
-}
-
-#qText{
-  color:#0c306d;
-  line-height:1.75;
-}
-
-.input-answer{
-  font-size:22px;
-  text-align:center;
-  direction:ltr;
-}
-
+#counter{color:#63728b;font-weight:bold;margin-bottom:8px}
+#qText{color:#0c306d;line-height:1.75}
+.input-answer{font-size:22px;text-align:center;direction:ltr}
 .choice{
-  width:100%;
-  background:#f4f7fb;
-  border:2px solid #d7e0ee;
-  margin:7px 0;
-  color:#172033;
+  width:100%;background:#f4f7fb;border:2px solid #d7e0ee;
+  margin:7px 0;color:#172033;
 }
-
-.choice:hover{
-  border-color:#7aa8e8;
-}
-
-.correct{
-  background:#daf4e4!important;
-  border-color:#199153!important;
-}
-
-.wrong{
-  background:#fde1e1!important;
-  border-color:#d64545!important;
-}
-
+.choice:hover{border-color:#7aa8e8}
+.correct{background:#daf4e4!important;border-color:#199153!important}
+.wrong{background:#fde1e1!important;border-color:#d64545!important}
 .feedback{
-  margin-top:18px;
-  padding:15px;
-  border-radius:14px;
-  font-size:17px;
-  line-height:1.7;
+  margin-top:18px;padding:15px;border-radius:14px;
+  font-size:17px;line-height:1.7;
 }
-
-.feedback.good{
-  background:#e6f6ed;
-  color:#10683a;
-}
-
-.feedback.bad{
-  background:#fff0f0;
-  color:#a72828;
-}
-
+.feedback.good{background:#e6f6ed;color:#10683a}
+.feedback.bad{background:#fff0f0;color:#a72828}
 .task-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;
-  gap:12px;
-  margin:10px 0;
-  padding:12px;
-  border-radius:13px;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;
+  gap:12px;margin:10px 0;padding:12px;border-radius:13px;
   background:#f7f9fd;
 }
-
-.task-row strong{
-  color:#123b7a;
-}
-
-.section-change{
-  text-align:center;
-  padding:12px;
-  margin-bottom:16px;
-  border-radius:15px;
-  font-weight:900;
-  font-size:20px;
-}
-
-.section-change.math-box{
-  background:#e9f2ff;
-  color:#124d9a;
-}
-
-.section-change.science-box{
-  background:#e9f8ef;
-  color:#12703f;
-}
-
+.task-row strong{color:#123b7a}
 #score{
-  direction:ltr;
-  font-size:55px;
-  font-weight:900;
-  color:#0b377e;
+  direction:ltr;font-size:55px;font-weight:900;
+  color:#0b377e;text-align:center;
+}
+
+/* الرسم البياني */
+.chart-card{
+  max-width:650px;
+  margin:18px auto 28px;
+  background:#fff;
+  border:2px solid #dbe5f3;
+  border-radius:18px;
+  padding:18px 18px 24px;
+}
+.chart-title{
   text-align:center;
+  color:#153d77;
+  font-weight:900;
+  margin:0 0 12px;
+}
+.chart-wrap{
+  display:grid;
+  grid-template-columns:52px 1fr;
+  gap:8px;
+  direction:ltr;
+}
+.y-axis{
+  height:280px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  text-align:right;
+  font-size:13px;
+  color:#53637b;
+  padding-bottom:34px;
+}
+.chart-area{
+  height:280px;
+  position:relative;
+  border-left:2px solid #49566c;
+  border-bottom:2px solid #49566c;
+  background:
+    repeating-linear-gradient(
+      to top,
+      #e7edf6 0,
+      #e7edf6 1px,
+      transparent 1px,
+      transparent 35px
+    );
+  padding:12px 12px 0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-around;
+  gap:10px;
+}
+.bar-group{
+  flex:1;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:center;
+  min-width:0;
+}
+.bar-value{
+  font-weight:900;
+  color:#153d77;
+  margin-bottom:5px;
+}
+.bar{
+  width:58%;
+  max-width:58px;
+  min-width:28px;
+  background:linear-gradient(180deg,#6bb0f3,#195ba8);
+  border-radius:8px 8px 0 0;
+  box-shadow:0 4px 8px rgba(20,70,130,.16);
+}
+.bar-label{
+  margin-top:8px;
+  font-weight:800;
+  font-size:13px;
+  color:#263b59;
+  white-space:nowrap;
+  direction:rtl;
+}
+.x-title{
+  text-align:center;
+  margin-top:12px;
+  font-weight:900;
+  color:#53637b;
 }
 
 @media(max-width:650px){
@@ -284,6 +242,11 @@ body{
   .launch-card{margin:-58px 10px 20px;padding:25px 17px}
   .launch-btn{width:100%;min-width:0}
   .task-row{grid-template-columns:1fr}
+  .chart-card{padding:12px 10px 20px}
+  .chart-wrap{grid-template-columns:38px 1fr}
+  .chart-area{height:245px;padding:8px 5px 0;gap:4px}
+  .y-axis{height:245px;padding-bottom:32px}
+  .bar-label{font-size:11px}
 }
 </style>
 </head>
@@ -309,9 +272,7 @@ body{
     انطلق في رحلة جديدة عبر فضاء TIMSS<br>
     3 تحديات في الرياضيات و3 تحديات في العلوم.
   </p>
-  <button id="start" class="btn primary launch-btn">
-    🚀 ابدأ المسابقة
-  </button>
+  <button id="start" class="btn primary launch-btn">🚀 ابدأ المسابقة</button>
 </section>
 
 <section id="info" class="card hidden">
@@ -325,102 +286,66 @@ body{
     <option>4/4</option>
   </select>
 
-  <input
-    id="studentName"
-    class="field"
-    placeholder="اكتب الاسم الرباعي"
-  >
-
+  <input id="studentName" class="field" placeholder="اكتب الاسم الرباعي">
   <p id="nameMsg" style="color:#b42318"></p>
 
-  <button id="infoNext" class="btn primary" disabled>
-    ابدأ التحدي
-  </button>
+  <button id="infoNext" class="btn primary" disabled>ابدأ التحدي</button>
 </section>
 
 <section id="quiz" class="card hidden">
-
   <div id="counter"></div>
-
   <div id="subjectBadge" class="subject-badge"></div>
-
   <div id="sectionTitle"></div>
-
   <h2 id="qText"></h2>
-
   <div id="answerArea"></div>
 
-  <button
-    id="check"
-    class="btn primary"
-    style="margin-top:16px"
-  >
+  <button id="check" class="btn primary" style="margin-top:16px">
     تحقق من الإجابة
   </button>
 
   <div id="feedback"></div>
 
   <div class="row">
-    <button id="prev" class="btn secondary">
-      السابق
-    </button>
-
-    <button id="next" class="btn primary" disabled>
-      التالي
-    </button>
+    <button id="prev" class="btn secondary">السابق</button>
+    <button id="next" class="btn primary" disabled>التالي</button>
   </div>
-
 </section>
 
 <section id="result" class="card hidden">
-  <h2 style="text-align:center;color:#0b306f">
-    🏆 نتيجة التحدي
-  </h2>
-
+  <h2 style="text-align:center;color:#0b306f">🏆 نتيجة التحدي</h2>
   <div id="score"></div>
-
   <p id="summary" style="text-align:center;font-size:19px"></p>
-
-  <p id="resultMsg"
-     style="text-align:center;font-size:22px;font-weight:bold"></p>
+  <p id="resultMsg" style="text-align:center;font-size:22px;font-weight:bold"></p>
 </section>
 
 </div>
 
 <script>
-const CONFIG = {
-  SUPABASE_URL:
-    "https://xafozswqbmydqfgurvla.supabase.co",
-
-  SUPABASE_ANON_KEY:
-    "sb_publishable_0J6utd1edGTRV75-QHVEFw_FJw_c_Sn"
+const CONFIG={
+  SUPABASE_URL:"https://xafozswqbmydqfgurvla.supabase.co",
+  SUPABASE_ANON_KEY:"sb_publishable_0J6utd1edGTRV75-QHVEFw_FJw_c_Sn"
 };
 
-const qs = s => document.querySelector(s);
+const qs=s=>document.querySelector(s);
 
 function normalizeDigits(v){
   const ar="٠١٢٣٤٥٦٧٨٩";
   const fa="۰۱۲۳۴۵۶۷۸۹";
-
   return String(v)
     .replace(/[٠-٩]/g,d=>ar.indexOf(d))
     .replace(/[۰-۹]/g,d=>fa.indexOf(d))
     .replace(/\s/g,"");
 }
 
-const Q = [
+const Q=[
 
 {
   subject:"رياضيات",
   source:"الفصل الأول – السؤال 8",
   type:"text",
-
-  text:
-  "اكتب عددًا من سبعة منازل بحيث يكون الرقم ٨ في منزلة عشرات الألوف، والرقم ٤ في منزلة المئات، والرقم ٥ في منزلة الآحاد.",
-
+  text:"اكتب عددًا من سبعة منازل بحيث يكون الرقم ٨ في منزلة عشرات الألوف، والرقم ٤ في منزلة المئات، والرقم ٥ في منزلة الآحاد.",
   validate:value=>{
     const x=normalizeDigits(value);
-
     return (
       /^[1-9][0-9]{6}$/.test(x) &&
       x[2]==="8" &&
@@ -428,51 +353,33 @@ const Q = [
       x[6]==="5"
     );
   },
-
-  explain:
-  "يجب أن يتكوّن العدد من 7 أرقام، ويكون الرقم ٨ في منزلة عشرات الألوف، والرقم ٤ في المئات، والرقم ٥ في الآحاد."
+  explain:"يجب أن يتكوّن العدد من 7 أرقام، ويكون الرقم ٨ في منزلة عشرات الألوف، والرقم ٤ في المئات، والرقم ٥ في الآحاد."
 },
 
 {
   subject:"رياضيات",
   source:"الفصل الثاني – السؤال 19 (أ)",
   type:"number",
-
-  text:
-  "أوجد قيمة ك لتجعل الجملة العددية صحيحة: ك + ٧ + ك = ١٥",
-
-  validate:value=>{
-    return Number(normalizeDigits(value))===4;
-  },
-
-  explain:
-  "ك + ٧ + ك = ١٥، أي ٢ك + ٧ = ١٥، ومنه ٢ك = ٨، لذلك ك = ٤."
+  text:"أوجد قيمة ك لتجعل الجملة العددية صحيحة: ك + ٧ + ك = ١٥",
+  validate:value=>Number(normalizeDigits(value))===4,
+  explain:"ك + ٧ + ك = ١٥، أي ٢ك + ٧ = ١٥، ومنه ٢ك = ٨، لذلك ك = ٤."
 },
 
 {
   subject:"رياضيات",
   source:"الفصل الثالث – السؤال 8 (2)",
   type:"number",
-
-  text:
-  "يوضح الرسم البياني عدد علب الحليب المباعة خلال أسبوع: الأحد ٢٥، الاثنين ٢٠، الثلاثاء ٣٠، الأربعاء ١٥، الخميس ٣٥. كم عدد علب الحليب التي باعتها المدرسة في ذلك الأسبوع؟",
-
-  validate:value=>{
-    return Number(normalizeDigits(value))===125;
-  },
-
-  explain:
-  "٢٥ + ٢٠ + ٣٠ + ١٥ + ٣٥ = ١٢٥ علبة."
+  chart:true,
+  text:"يوضح الرسم البياني عدد علب الحليب التي بيعت في كل يوم لمدة أسبوع في المدرسة. كم عدد علب الحليب التي باعتها المدرسة في ذلك الأسبوع؟",
+  validate:value=>Number(normalizeDigits(value))===125,
+  explain:"نجمع قيم الأعمدة: ٢٥ + ٢٠ + ٣٠ + ١٥ + ٣٥ = ١٢٥ علبة."
 },
 
 {
   subject:"علوم",
   source:"السؤال 10",
   type:"classification",
-
-  text:
-  "صنّف كل حيوان إلى: ثدييات، زواحف، أو حيوانات أخرى.",
-
+  text:"صنّف كل حيوان إلى: ثدييات، زواحف، أو حيوانات أخرى.",
   items:[
     ["سحلية","زواحف"],
     ["أرنب","ثدييات"],
@@ -481,20 +388,14 @@ const Q = [
     ["فقمة","ثدييات"],
     ["عصفور","أخرى"],
     ["ضفدع","أخرى"]
-  ],
-
-  explain:
-  "الأرنب والفقمة من الثدييات، والسحلية والسلحفاة من الزواحف، أما العنكبوت والعصفور والضفدع فتصنّف ضمن الحيوانات الأخرى في هذا السؤال."
+  ]
 },
 
 {
   subject:"علوم",
   source:"السؤال 13",
   type:"matching",
-
-  text:
-  "صِل بين كل عضو من أعضاء الجسم ووظيفته الحيوية باختيار الوظيفة المناسبة.",
-
+  text:"اختر الوظيفة الحيوية المناسبة لكل عضو من أعضاء الجسم.",
   items:[
     ["العضلات","تحريك الجسم"],
     ["الجلد","تنظيم درجة حرارة الجسم"],
@@ -502,38 +403,28 @@ const Q = [
     ["القلب","ضخ الدم إلى أجزاء الجسم"],
     ["المعدة","هضم الطعام"]
   ],
-
   options:[
     "تنظيم عمل الجسم",
     "هضم الطعام",
     "ضخ الدم إلى أجزاء الجسم",
     "تحريك الجسم",
     "تنظيم درجة حرارة الجسم"
-  ],
-
-  explain:
-  "العضلات تحرك الجسم، والجلد يساعد في تنظيم حرارته، والدماغ ينظم عمل الجسم، والقلب يضخ الدم، والمعدة تهضم الطعام."
+  ]
 },
 
 {
   subject:"علوم",
   source:"السؤال 16",
   type:"choice",
-
-  text:
-  "قام أحمد بقياس نبضه وتنفسه مباشرة قبل وبعد الجري لمسافة ٥٠ مترًا. ما التغيرات التي تتوقع أن يجدها؟",
-
+  text:"قام أحمد بقياس نبضه وتنفسه مباشرة قبل وبعد الجري لمسافة ٥٠ مترًا. ما التغيرات التي تتوقع أن يجدها؟",
   options:[
     "لا تغير في معدل النبض ولكن نقصان في معدل التنفس.",
     "لا تغير في معدل التنفس ولكن زيادة في معدل النبض.",
     "زيادة في معدل النبض ومعدل التنفس.",
     "نقصان في معدل النبض ومعدل التنفس."
   ],
-
   correct:2,
-
-  explain:
-  "أثناء الجري تحتاج العضلات إلى مزيد من الأكسجين، لذلك يزداد كل من معدل النبض ومعدل التنفس."
+  explain:"أثناء الجري تحتاج العضلات إلى مزيد من الأكسجين، لذلك يزداد كل من معدل النبض ومعدل التنفس."
 }
 
 ];
@@ -544,33 +435,24 @@ let S={
   i:0,
   answers:Array(6).fill(null),
   correct:Array(6).fill(false),
-  checked:Array(6).fill(false)
+  checked:Array(6).fill(false),
+  saved:false
 };
 
 function show(id){
-  ["intro","info","quiz","result"]
-    .forEach(x=>qs("#"+x).classList.add("hidden"));
-
+  ["intro","info","quiz","result"].forEach(
+    x=>qs("#"+x).classList.add("hidden")
+  );
   qs("#"+id).classList.remove("hidden");
 }
 
-qs("#start").onclick=()=>{
-  show("info");
-};
+qs("#start").onclick=()=>show("info");
 
 function validateStudent(){
-  const parts=qs("#studentName")
-    .value
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean);
-
-  const ok=
-    qs("#className").value &&
-    parts.length>=4;
+  const parts=qs("#studentName").value.trim().split(/\s+/).filter(Boolean);
+  const ok=qs("#className").value && parts.length>=4;
 
   qs("#infoNext").disabled=!ok;
-
   qs("#nameMsg").textContent=
     qs("#studentName").value && parts.length<4
       ?"يرجى كتابة الاسم الرباعي."
@@ -583,58 +465,41 @@ qs("#className").onchange=validateStudent;
 qs("#infoNext").onclick=()=>{
   S.name=qs("#studentName").value.trim();
   S.cls=qs("#className").value;
-
   show("quiz");
   render();
 };
 
 function render(){
-
   const q=Q[S.i];
 
-  qs("#counter").textContent=
-    `السؤال ${S.i+1} من ${Q.length}`;
+  qs("#counter").textContent=`السؤال ${S.i+1} من ${Q.length}`;
 
   const badge=qs("#subjectBadge");
-
   badge.textContent=q.subject;
-
   badge.className=
     "subject-badge "+(q.subject==="رياضيات"?"math":"science");
 
-  qs("#sectionTitle").innerHTML=
-    `<small>${q.source}</small>`;
-
+  qs("#sectionTitle").innerHTML=`<small>${q.source}</small>`;
   qs("#qText").textContent=q.text;
-
   qs("#feedback").innerHTML="";
-
+  qs("#feedback").className="";
   qs("#answerArea").innerHTML="";
 
   qs("#prev").disabled=S.i===0;
-
   qs("#next").disabled=!S.checked[S.i];
-
   qs("#next").textContent=
-    S.i===Q.length-1
-      ?"إنهاء المسابقة"
-      :"التالي";
-
+    S.i===Q.length-1 ? "إنهاء المسابقة" : "التالي";
   qs("#check").disabled=S.checked[S.i];
 
-  if(q.type==="text" || q.type==="number"){
+  if(q.chart){
+    renderChartQuestion(q);
+  }else if(q.type==="text" || q.type==="number"){
     renderText(q);
-  }
-
-  if(q.type==="choice"){
+  }else if(q.type==="choice"){
     renderChoice(q);
-  }
-
-  if(q.type==="classification"){
+  }else if(q.type==="classification"){
     renderClassification(q);
-  }
-
-  if(q.type==="matching"){
+  }else if(q.type==="matching"){
     renderMatching(q);
   }
 
@@ -644,51 +509,105 @@ function render(){
 }
 
 function renderText(q){
-
   const input=document.createElement("input");
-
   input.id="answerInput";
   input.className="field input-answer";
   input.placeholder="اكتب إجابتك هنا";
 
-  if(S.answers[S.i]!==null)
+  if(S.answers[S.i]!==null){
     input.value=S.answers[S.i];
+  }
 
-  if(S.checked[S.i])
+  if(S.checked[S.i]){
     input.disabled=true;
+  }
 
   qs("#answerArea").appendChild(input);
 }
 
+function renderChartQuestion(q){
+  const data=[
+    ["الأحد",25],
+    ["الاثنين",20],
+    ["الثلاثاء",30],
+    ["الأربعاء",15],
+    ["الخميس",35]
+  ];
+
+  qs("#answerArea").innerHTML=`
+    <div class="chart-card">
+      <h3 class="chart-title">عدد علب الحليب المباعة</h3>
+
+      <div class="chart-wrap">
+        <div class="y-axis">
+          <span>٤٠</span>
+          <span>٣٥</span>
+          <span>٣٠</span>
+          <span>٢٥</span>
+          <span>٢٠</span>
+          <span>١٥</span>
+          <span>١٠</span>
+          <span>٥</span>
+          <span>٠</span>
+        </div>
+
+        <div class="chart-area">
+          ${data.map(([day,value])=>`
+            <div class="bar-group">
+              <div class="bar-value">${value}</div>
+              <div class="bar" style="height:${value*6}px"></div>
+              <div class="bar-label">${day}</div>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+
+      <div class="x-title">الأيام</div>
+    </div>
+
+    <input
+      id="answerInput"
+      class="field input-answer"
+      placeholder="اكتب مجموع علب الحليب"
+    >
+  `;
+
+  if(S.answers[S.i]!==null){
+    qs("#answerInput").value=S.answers[S.i];
+  }
+
+  if(S.checked[S.i]){
+    qs("#answerInput").disabled=true;
+  }
+}
+
 function renderChoice(q){
-
   q.options.forEach((o,i)=>{
-
     const b=document.createElement("button");
-
     b.className="btn choice";
     b.textContent=o;
-    b.dataset.index=i;
 
-    if(S.answers[S.i]===i)
+    if(S.answers[S.i]===i){
       b.style.borderColor="#145db5";
+    }
 
     if(S.checked[S.i]){
       b.disabled=true;
 
-      if(i===q.correct)
+      if(i===q.correct){
         b.classList.add("correct");
+      }
 
-      if(
-        i===S.answers[S.i] &&
-        i!==q.correct
-      )
+      if(i===S.answers[S.i] && i!==q.correct){
         b.classList.add("wrong");
+      }
     }
 
     b.onclick=()=>{
-      S.answers[S.i]=i;
-      render();
+      if(!S.checked[S.i]){
+        S.answers[S.i]=i;
+        render();
+      }
     };
 
     qs("#answerArea").appendChild(b);
@@ -696,9 +615,7 @@ function renderChoice(q){
 }
 
 function renderClassification(q){
-
   q.items.forEach((item,index)=>{
-
     const row=document.createElement("div");
     row.className="task-row";
 
@@ -717,24 +634,30 @@ function renderClassification(q){
     `;
 
     const saved=S.answers[S.i];
-
-    if(saved && saved[index])
+    if(saved && saved[index]){
       sel.value=saved[index];
+    }
 
-    if(S.checked[S.i])
+    if(S.checked[S.i]){
       sel.disabled=true;
+
+      if(saved[index]!==item[1]){
+        sel.style.borderColor="#d64545";
+        sel.style.background="#fff0f0";
+      }else{
+        sel.style.borderColor="#1f9d55";
+        sel.style.background="#effaf4";
+      }
+    }
 
     row.appendChild(name);
     row.appendChild(sel);
-
     qs("#answerArea").appendChild(row);
   });
 }
 
 function renderMatching(q){
-
   q.items.forEach((item,index)=>{
-
     const row=document.createElement("div");
     row.className="task-row";
 
@@ -745,39 +668,41 @@ function renderMatching(q){
     sel.className="field";
     sel.dataset.index=index;
 
-    let html=
-      `<option value="">اختر الوظيفة</option>`;
-
+    let html=`<option value="">اختر الوظيفة</option>`;
     q.options.forEach(o=>{
       html+=`<option>${o}</option>`;
     });
-
     sel.innerHTML=html;
 
     const saved=S.answers[S.i];
-
-    if(saved && saved[index])
+    if(saved && saved[index]){
       sel.value=saved[index];
+    }
 
-    if(S.checked[S.i])
+    if(S.checked[S.i]){
       sel.disabled=true;
+
+      if(saved[index]!==item[1]){
+        sel.style.borderColor="#d64545";
+        sel.style.background="#fff0f0";
+      }else{
+        sel.style.borderColor="#1f9d55";
+        sel.style.background="#effaf4";
+      }
+    }
 
     row.appendChild(name);
     row.appendChild(sel);
-
     qs("#answerArea").appendChild(row);
   });
 }
 
 qs("#check").onclick=()=>{
-
   const q=Q[S.i];
-
   let answer;
   let isCorrect=false;
 
   if(q.type==="text" || q.type==="number"){
-
     answer=qs("#answerInput").value.trim();
 
     if(!answer){
@@ -789,7 +714,6 @@ qs("#check").onclick=()=>{
   }
 
   if(q.type==="choice"){
-
     answer=S.answers[S.i];
 
     if(answer===null){
@@ -801,12 +725,7 @@ qs("#check").onclick=()=>{
   }
 
   if(q.type==="classification"){
-
-    const selects=[
-      ...qs("#answerArea")
-        .querySelectorAll("select")
-    ];
-
+    const selects=[...qs("#answerArea").querySelectorAll("select")];
     answer=selects.map(x=>x.value);
 
     if(answer.some(x=>!x)){
@@ -814,28 +733,19 @@ qs("#check").onclick=()=>{
       return;
     }
 
-    isCorrect=q.items.every(
-      (item,i)=>answer[i]===item[1]
-    );
+    isCorrect=q.items.every((item,i)=>answer[i]===item[1]);
   }
 
   if(q.type==="matching"){
-
-    const selects=[
-      ...qs("#answerArea")
-        .querySelectorAll("select")
-    ];
-
+    const selects=[...qs("#answerArea").querySelectorAll("select")];
     answer=selects.map(x=>x.value);
 
     if(answer.some(x=>!x)){
-      alert("أكمل جميع المطابقات أولاً.");
+      alert("أكمل وظائف جميع الأعضاء أولاً.");
       return;
     }
 
-    isCorrect=q.items.every(
-      (item,i)=>answer[i]===item[1]
-    );
+    isCorrect=q.items.every((item,i)=>answer[i]===item[1]);
   }
 
   S.answers[S.i]=answer;
@@ -846,13 +756,49 @@ qs("#check").onclick=()=>{
 };
 
 function showStoredFeedback(q){
+  const box=qs("#feedback");
+
+  if(q.type==="classification"){
+    const answer=S.answers[S.i] || [];
+    const errors=q.items
+      .filter((item,i)=>answer[i]!==item[1])
+      .map(item=>item[0]);
+
+    if(errors.length===0){
+      box.className="feedback good";
+      box.innerHTML="<b>✅ جميع التصنيفات صحيحة.</b>";
+    }else{
+      box.className="feedback bad";
+      box.innerHTML=
+        "<b>❌ راجع تصنيف:</b><br>"+
+        errors.join("، ")+
+        "<br><small>تم تحديد موضع الخطأ فقط دون إظهار الإجابة الصحيحة.</small>";
+    }
+    return;
+  }
+
+  if(q.type==="matching"){
+    const answer=S.answers[S.i] || [];
+    const errors=q.items
+      .filter((item,i)=>answer[i]!==item[1])
+      .map(item=>item[0]);
+
+    if(errors.length===0){
+      box.className="feedback good";
+      box.innerHTML="<b>✅ جميع وظائف الأعضاء صحيحة.</b>";
+    }else{
+      box.className="feedback bad";
+      box.innerHTML=
+        "<b>❌ راجع وظيفة:</b><br>"+
+        errors.join("، ")+
+        "<br><small>تم تحديد العضو الذي يحتاج إلى مراجعة دون إظهار الوظيفة الصحيحة.</small>";
+    }
+    return;
+  }
 
   const ok=S.correct[S.i];
 
-  const box=qs("#feedback");
-
-  box.className=
-    "feedback "+(ok?"good":"bad");
+  box.className="feedback "+(ok?"good":"bad");
 
   box.innerHTML=
     ok
@@ -861,7 +807,6 @@ function showStoredFeedback(q){
 }
 
 qs("#prev").onclick=()=>{
-
   if(S.i>0){
     S.i--;
     render();
@@ -869,32 +814,25 @@ qs("#prev").onclick=()=>{
 };
 
 qs("#next").onclick=async()=>{
-
   if(S.i<Q.length-1){
-
     S.i++;
     render();
-
   }else{
-
     await finishCompetition();
   }
 };
 
 function answerToText(index){
-
   const q=Q[index];
   const a=S.answers[index];
 
   if(Array.isArray(a)){
-
-    return q.items.map(
-      (item,i)=>item[0]+": "+a[i]
-    ).join(" | ");
+    return q.items
+      .map((item,i)=>item[0]+": "+a[i])
+      .join(" | ");
   }
 
   if(q.type==="choice"){
-
     return q.options[a] || "";
   }
 
@@ -902,9 +840,12 @@ function answerToText(index){
 }
 
 async function finishCompetition(){
+  if(S.saved){
+    showResult(S.correct.filter(Boolean).length);
+    return;
+  }
 
-  const score=
-    S.correct.filter(Boolean).length;
+  const score=S.correct.filter(Boolean).length;
 
   const payload={
     student_name:S.name,
@@ -935,10 +876,8 @@ async function finishCompetition(){
   qs("#next").textContent="جاري حفظ النتيجة...";
 
   try{
-
     const r=await fetch(
-      CONFIG.SUPABASE_URL+
-      "/rest/v1/student_results_3",
+      CONFIG.SUPABASE_URL+"/rest/v1/student_results_3",
       {
         method:"POST",
         headers:{
@@ -951,64 +890,52 @@ async function finishCompetition(){
     );
 
     if(!r.ok){
-
       let error={};
+      try{error=await r.json()}catch{}
 
-      try{
-        error=await r.json();
-      }catch{}
+      console.error(error);
 
-      if(error.code==="23505"){
+      alert(
+        "تعذر حفظ النتيجة. تأكد من اتصال الإنترنت ثم أعد المحاولة."
+      );
 
-        alert(
-          "لقد شاركت في مسابقة أبطال TIMSS (3) مسبقًا."
-        );
-
-      }else{
-
-        console.error(error);
-
-        alert(
-          "تعذر حفظ النتيجة حاليًا. سنكمل إعداد قاعدة البيانات في الخطوة التالية."
-        );
-      }
+      qs("#next").disabled=false;
+      qs("#next").textContent="إنهاء المسابقة";
+      return;
     }
 
-  }catch(e){
+    S.saved=true;
+    showResult(score);
 
+  }catch(e){
     console.error(e);
 
     alert(
-      "تعذر الاتصال بقاعدة البيانات."
+      "تعذر الاتصال بقاعدة البيانات. حاول مرة أخرى."
     );
-  }
 
-  showResult(score);
+    qs("#next").disabled=false;
+    qs("#next").textContent="إنهاء المسابقة";
+  }
 }
 
 function showResult(score){
-
   show("result");
 
-  qs("#score").textContent=
-    score+" / 6";
-
-  qs("#summary").textContent=
-    S.name+" – الصف "+S.cls;
+  qs("#score").textContent=score+" / 6";
+  qs("#summary").textContent=S.name+" – الصف "+S.cls;
 
   let msg="";
 
-  if(score===6)
+  if(score===6){
     msg="🌟 بطل TIMSS! حققت الدرجة الكاملة.";
-
-  else if(score>=5)
+  }else if(score>=5){
     msg="🚀 أداء رائع جدًا.. أنت قريب من القمة!";
-
-  else if(score>=3)
+  }else if(score>=3){
     msg="👏 أداء جيد.. استمر في التدريب والتحدي.";
-
-  else
+  }else{
     msg="💪 واصل التدريب.. فكل محاولة تقربك من التميز.";
+  }
 
   qs("#resultMsg").textContent=msg;
 }
