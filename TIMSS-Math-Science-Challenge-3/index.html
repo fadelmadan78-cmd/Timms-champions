@@ -1,1 +1,1018 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مسابقة أبطال TIMSS (3) – تحدي الرياضيات والعلوم</title>
 
+<style>
+*{box-sizing:border-box}
+
+body{
+  font-family:Tahoma,Arial,sans-serif;
+  margin:0;
+  background:#eef5ff;
+  color:#172033;
+}
+
+:root{
+  --navy:#082b68;
+  --blue:#0f4ea8;
+  --gold:#ffbf2f;
+  --gold2:#ff9f0a;
+  --green:#16834b;
+  --red:#c83535;
+}
+
+.space-hero{
+  min-height:440px;
+  background:
+    linear-gradient(90deg,rgba(2,19,57,.20),rgba(2,19,57,.08)),
+    url("../timss-space-hero.png") center/cover no-repeat;
+  border-radius:0 0 34px 34px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 18px 45px rgba(1,25,66,.22);
+}
+
+.space-overlay{
+  min-height:440px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding-top:36px;
+}
+
+.space-title{
+  text-align:center;
+  color:white;
+  text-shadow:0 3px 14px rgba(0,0,0,.3);
+}
+
+.space-title h1{
+  margin:0;
+  font-size:clamp(30px,5vw,58px);
+  color:#ffd15c;
+  font-weight:900;
+}
+
+.space-subtitle{
+  display:inline-block;
+  margin-top:13px;
+  padding:11px 22px;
+  border-radius:999px;
+  background:rgba(6,43,108,.85);
+  border:1px solid rgba(255,255,255,.3);
+  font-weight:800;
+  font-size:clamp(16px,2vw,22px);
+}
+
+.crown{font-size:38px}
+
+.wrap{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+
+.card{
+  background:white;
+  border-radius:24px;
+  padding:24px;
+  margin:18px 0;
+  box-shadow:0 14px 32px rgba(0,31,83,.13);
+  border:1px solid rgba(28,75,147,.08);
+}
+
+.launch-card{
+  max-width:700px;
+  margin:-88px auto 28px;
+  position:relative;
+  z-index:3;
+  background:rgba(255,255,255,.97);
+  border-radius:28px;
+  padding:32px 28px;
+  text-align:center;
+  box-shadow:0 24px 55px rgba(0,31,83,.20);
+}
+
+.launch-card h2{
+  color:#0b2e6f;
+  font-size:clamp(27px,4vw,40px);
+  margin:5px 0 10px;
+}
+
+.launch-card p{
+  color:#56647c;
+  font-size:18px;
+  line-height:1.8;
+}
+
+.launch-badge{
+  width:66px;
+  height:66px;
+  border-radius:20px;
+  display:grid;
+  place-items:center;
+  margin:-64px auto 12px;
+  font-size:35px;
+  background:#fff8d8;
+  border:2px solid #ffe18a;
+}
+
+.btn{
+  border:0;
+  border-radius:14px;
+  padding:13px 20px;
+  font-weight:800;
+  cursor:pointer;
+  font-size:17px;
+}
+
+.primary{
+  background:linear-gradient(180deg,#ffd764,#ffb31f);
+  color:#082b68;
+}
+
+.secondary{
+  background:#e7eef9;
+  color:#173d77;
+}
+
+.launch-btn{
+  min-width:280px;
+  padding:16px 30px;
+  font-size:22px;
+  box-shadow:0 7px 0 #d58c00;
+}
+
+.hidden{display:none!important}
+
+.field{
+  width:100%;
+  padding:13px;
+  border:2px solid #d7e0ee;
+  border-radius:12px;
+  margin-top:9px;
+  font-size:17px;
+  background:white;
+}
+
+.row{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.row>*{flex:1}
+
+.subject-badge{
+  display:inline-block;
+  padding:7px 15px;
+  border-radius:999px;
+  color:white;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.math{background:#135fc0}
+.science{background:#149257}
+
+#counter{
+  color:#63728b;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+#qText{
+  color:#0c306d;
+  line-height:1.75;
+}
+
+.input-answer{
+  font-size:22px;
+  text-align:center;
+  direction:ltr;
+}
+
+.choice{
+  width:100%;
+  background:#f4f7fb;
+  border:2px solid #d7e0ee;
+  margin:7px 0;
+  color:#172033;
+}
+
+.choice:hover{
+  border-color:#7aa8e8;
+}
+
+.correct{
+  background:#daf4e4!important;
+  border-color:#199153!important;
+}
+
+.wrong{
+  background:#fde1e1!important;
+  border-color:#d64545!important;
+}
+
+.feedback{
+  margin-top:18px;
+  padding:15px;
+  border-radius:14px;
+  font-size:17px;
+  line-height:1.7;
+}
+
+.feedback.good{
+  background:#e6f6ed;
+  color:#10683a;
+}
+
+.feedback.bad{
+  background:#fff0f0;
+  color:#a72828;
+}
+
+.task-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:12px;
+  margin:10px 0;
+  padding:12px;
+  border-radius:13px;
+  background:#f7f9fd;
+}
+
+.task-row strong{
+  color:#123b7a;
+}
+
+.section-change{
+  text-align:center;
+  padding:12px;
+  margin-bottom:16px;
+  border-radius:15px;
+  font-weight:900;
+  font-size:20px;
+}
+
+.section-change.math-box{
+  background:#e9f2ff;
+  color:#124d9a;
+}
+
+.section-change.science-box{
+  background:#e9f8ef;
+  color:#12703f;
+}
+
+#score{
+  direction:ltr;
+  font-size:55px;
+  font-weight:900;
+  color:#0b377e;
+  text-align:center;
+}
+
+@media(max-width:650px){
+  .space-hero{min-height:370px;background-position:35% center}
+  .space-overlay{min-height:370px;padding-top:25px}
+  .launch-card{margin:-58px 10px 20px;padding:25px 17px}
+  .launch-btn{width:100%;min-width:0}
+  .task-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="space-hero">
+  <div class="space-overlay">
+    <div class="space-title">
+      <div class="crown">👑</div>
+      <h1>مسابقة أبطال TIMSS (3)</h1>
+      <div class="space-subtitle">تحدي الرياضيات والعلوم</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section id="intro" class="launch-card">
+  <div class="launch-badge">🚀</div>
+  <h2>6 محطات نحو التميز</h2>
+  <p>
+    انطلق في رحلة جديدة عبر فضاء TIMSS<br>
+    3 تحديات في الرياضيات و3 تحديات في العلوم.
+  </p>
+  <button id="start" class="btn primary launch-btn">
+    🚀 ابدأ المسابقة
+  </button>
+</section>
+
+<section id="info" class="card hidden">
+  <h2>بيانات الطالب</h2>
+
+  <select id="className" class="field">
+    <option value="">اختر الصف</option>
+    <option>4/1</option>
+    <option>4/2</option>
+    <option>4/3</option>
+    <option>4/4</option>
+  </select>
+
+  <input
+    id="studentName"
+    class="field"
+    placeholder="اكتب الاسم الرباعي"
+  >
+
+  <p id="nameMsg" style="color:#b42318"></p>
+
+  <button id="infoNext" class="btn primary" disabled>
+    ابدأ التحدي
+  </button>
+</section>
+
+<section id="quiz" class="card hidden">
+
+  <div id="counter"></div>
+
+  <div id="subjectBadge" class="subject-badge"></div>
+
+  <div id="sectionTitle"></div>
+
+  <h2 id="qText"></h2>
+
+  <div id="answerArea"></div>
+
+  <button
+    id="check"
+    class="btn primary"
+    style="margin-top:16px"
+  >
+    تحقق من الإجابة
+  </button>
+
+  <div id="feedback"></div>
+
+  <div class="row">
+    <button id="prev" class="btn secondary">
+      السابق
+    </button>
+
+    <button id="next" class="btn primary" disabled>
+      التالي
+    </button>
+  </div>
+
+</section>
+
+<section id="result" class="card hidden">
+  <h2 style="text-align:center;color:#0b306f">
+    🏆 نتيجة التحدي
+  </h2>
+
+  <div id="score"></div>
+
+  <p id="summary" style="text-align:center;font-size:19px"></p>
+
+  <p id="resultMsg"
+     style="text-align:center;font-size:22px;font-weight:bold"></p>
+</section>
+
+</div>
+
+<script>
+const CONFIG = {
+  SUPABASE_URL:
+    "https://xafozswqbmydqfgurvla.supabase.co",
+
+  SUPABASE_ANON_KEY:
+    "sb_publishable_0J6utd1edGTRV75-QHVEFw_FJw_c_Sn"
+};
+
+const qs = s => document.querySelector(s);
+
+function normalizeDigits(v){
+  const ar="٠١٢٣٤٥٦٧٨٩";
+  const fa="۰۱۲۳۴۵۶۷۸۹";
+
+  return String(v)
+    .replace(/[٠-٩]/g,d=>ar.indexOf(d))
+    .replace(/[۰-۹]/g,d=>fa.indexOf(d))
+    .replace(/\s/g,"");
+}
+
+const Q = [
+
+{
+  subject:"رياضيات",
+  source:"الفصل الأول – السؤال 8",
+  type:"text",
+
+  text:
+  "اكتب عددًا من سبعة منازل بحيث يكون الرقم ٨ في منزلة عشرات الألوف، والرقم ٤ في منزلة المئات، والرقم ٥ في منزلة الآحاد.",
+
+  validate:value=>{
+    const x=normalizeDigits(value);
+
+    return (
+      /^[1-9][0-9]{6}$/.test(x) &&
+      x[2]==="8" &&
+      x[4]==="4" &&
+      x[6]==="5"
+    );
+  },
+
+  explain:
+  "يجب أن يتكوّن العدد من 7 أرقام، ويكون الرقم ٨ في منزلة عشرات الألوف، والرقم ٤ في المئات، والرقم ٥ في الآحاد."
+},
+
+{
+  subject:"رياضيات",
+  source:"الفصل الثاني – السؤال 19 (أ)",
+  type:"number",
+
+  text:
+  "أوجد قيمة ك لتجعل الجملة العددية صحيحة: ك + ٧ + ك = ١٥",
+
+  validate:value=>{
+    return Number(normalizeDigits(value))===4;
+  },
+
+  explain:
+  "ك + ٧ + ك = ١٥، أي ٢ك + ٧ = ١٥، ومنه ٢ك = ٨، لذلك ك = ٤."
+},
+
+{
+  subject:"رياضيات",
+  source:"الفصل الثالث – السؤال 8 (2)",
+  type:"number",
+
+  text:
+  "يوضح الرسم البياني عدد علب الحليب المباعة خلال أسبوع: الأحد ٢٥، الاثنين ٢٠، الثلاثاء ٣٠، الأربعاء ١٥، الخميس ٣٥. كم عدد علب الحليب التي باعتها المدرسة في ذلك الأسبوع؟",
+
+  validate:value=>{
+    return Number(normalizeDigits(value))===125;
+  },
+
+  explain:
+  "٢٥ + ٢٠ + ٣٠ + ١٥ + ٣٥ = ١٢٥ علبة."
+},
+
+{
+  subject:"علوم",
+  source:"السؤال 10",
+  type:"classification",
+
+  text:
+  "صنّف كل حيوان إلى: ثدييات، زواحف، أو حيوانات أخرى.",
+
+  items:[
+    ["سحلية","زواحف"],
+    ["أرنب","ثدييات"],
+    ["سلحفاة","زواحف"],
+    ["عنكبوت","أخرى"],
+    ["فقمة","ثدييات"],
+    ["عصفور","أخرى"],
+    ["ضفدع","أخرى"]
+  ],
+
+  explain:
+  "الأرنب والفقمة من الثدييات، والسحلية والسلحفاة من الزواحف، أما العنكبوت والعصفور والضفدع فتصنّف ضمن الحيوانات الأخرى في هذا السؤال."
+},
+
+{
+  subject:"علوم",
+  source:"السؤال 13",
+  type:"matching",
+
+  text:
+  "صِل بين كل عضو من أعضاء الجسم ووظيفته الحيوية باختيار الوظيفة المناسبة.",
+
+  items:[
+    ["العضلات","تحريك الجسم"],
+    ["الجلد","تنظيم درجة حرارة الجسم"],
+    ["الدماغ","تنظيم عمل الجسم"],
+    ["القلب","ضخ الدم إلى أجزاء الجسم"],
+    ["المعدة","هضم الطعام"]
+  ],
+
+  options:[
+    "تنظيم عمل الجسم",
+    "هضم الطعام",
+    "ضخ الدم إلى أجزاء الجسم",
+    "تحريك الجسم",
+    "تنظيم درجة حرارة الجسم"
+  ],
+
+  explain:
+  "العضلات تحرك الجسم، والجلد يساعد في تنظيم حرارته، والدماغ ينظم عمل الجسم، والقلب يضخ الدم، والمعدة تهضم الطعام."
+},
+
+{
+  subject:"علوم",
+  source:"السؤال 16",
+  type:"choice",
+
+  text:
+  "قام أحمد بقياس نبضه وتنفسه مباشرة قبل وبعد الجري لمسافة ٥٠ مترًا. ما التغيرات التي تتوقع أن يجدها؟",
+
+  options:[
+    "لا تغير في معدل النبض ولكن نقصان في معدل التنفس.",
+    "لا تغير في معدل التنفس ولكن زيادة في معدل النبض.",
+    "زيادة في معدل النبض ومعدل التنفس.",
+    "نقصان في معدل النبض ومعدل التنفس."
+  ],
+
+  correct:2,
+
+  explain:
+  "أثناء الجري تحتاج العضلات إلى مزيد من الأكسجين، لذلك يزداد كل من معدل النبض ومعدل التنفس."
+}
+
+];
+
+let S={
+  name:"",
+  cls:"",
+  i:0,
+  answers:Array(6).fill(null),
+  correct:Array(6).fill(false),
+  checked:Array(6).fill(false)
+};
+
+function show(id){
+  ["intro","info","quiz","result"]
+    .forEach(x=>qs("#"+x).classList.add("hidden"));
+
+  qs("#"+id).classList.remove("hidden");
+}
+
+qs("#start").onclick=()=>{
+  show("info");
+};
+
+function validateStudent(){
+  const parts=qs("#studentName")
+    .value
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+
+  const ok=
+    qs("#className").value &&
+    parts.length>=4;
+
+  qs("#infoNext").disabled=!ok;
+
+  qs("#nameMsg").textContent=
+    qs("#studentName").value && parts.length<4
+      ?"يرجى كتابة الاسم الرباعي."
+      :"";
+}
+
+qs("#studentName").oninput=validateStudent;
+qs("#className").onchange=validateStudent;
+
+qs("#infoNext").onclick=()=>{
+  S.name=qs("#studentName").value.trim();
+  S.cls=qs("#className").value;
+
+  show("quiz");
+  render();
+};
+
+function render(){
+
+  const q=Q[S.i];
+
+  qs("#counter").textContent=
+    `السؤال ${S.i+1} من ${Q.length}`;
+
+  const badge=qs("#subjectBadge");
+
+  badge.textContent=q.subject;
+
+  badge.className=
+    "subject-badge "+(q.subject==="رياضيات"?"math":"science");
+
+  qs("#sectionTitle").innerHTML=
+    `<small>${q.source}</small>`;
+
+  qs("#qText").textContent=q.text;
+
+  qs("#feedback").innerHTML="";
+
+  qs("#answerArea").innerHTML="";
+
+  qs("#prev").disabled=S.i===0;
+
+  qs("#next").disabled=!S.checked[S.i];
+
+  qs("#next").textContent=
+    S.i===Q.length-1
+      ?"إنهاء المسابقة"
+      :"التالي";
+
+  qs("#check").disabled=S.checked[S.i];
+
+  if(q.type==="text" || q.type==="number"){
+    renderText(q);
+  }
+
+  if(q.type==="choice"){
+    renderChoice(q);
+  }
+
+  if(q.type==="classification"){
+    renderClassification(q);
+  }
+
+  if(q.type==="matching"){
+    renderMatching(q);
+  }
+
+  if(S.checked[S.i]){
+    showStoredFeedback(q);
+  }
+}
+
+function renderText(q){
+
+  const input=document.createElement("input");
+
+  input.id="answerInput";
+  input.className="field input-answer";
+  input.placeholder="اكتب إجابتك هنا";
+
+  if(S.answers[S.i]!==null)
+    input.value=S.answers[S.i];
+
+  if(S.checked[S.i])
+    input.disabled=true;
+
+  qs("#answerArea").appendChild(input);
+}
+
+function renderChoice(q){
+
+  q.options.forEach((o,i)=>{
+
+    const b=document.createElement("button");
+
+    b.className="btn choice";
+    b.textContent=o;
+    b.dataset.index=i;
+
+    if(S.answers[S.i]===i)
+      b.style.borderColor="#145db5";
+
+    if(S.checked[S.i]){
+      b.disabled=true;
+
+      if(i===q.correct)
+        b.classList.add("correct");
+
+      if(
+        i===S.answers[S.i] &&
+        i!==q.correct
+      )
+        b.classList.add("wrong");
+    }
+
+    b.onclick=()=>{
+      S.answers[S.i]=i;
+      render();
+    };
+
+    qs("#answerArea").appendChild(b);
+  });
+}
+
+function renderClassification(q){
+
+  q.items.forEach((item,index)=>{
+
+    const row=document.createElement("div");
+    row.className="task-row";
+
+    const name=document.createElement("strong");
+    name.textContent=item[0];
+
+    const sel=document.createElement("select");
+    sel.className="field";
+    sel.dataset.index=index;
+
+    sel.innerHTML=`
+      <option value="">اختر التصنيف</option>
+      <option>ثدييات</option>
+      <option>زواحف</option>
+      <option>أخرى</option>
+    `;
+
+    const saved=S.answers[S.i];
+
+    if(saved && saved[index])
+      sel.value=saved[index];
+
+    if(S.checked[S.i])
+      sel.disabled=true;
+
+    row.appendChild(name);
+    row.appendChild(sel);
+
+    qs("#answerArea").appendChild(row);
+  });
+}
+
+function renderMatching(q){
+
+  q.items.forEach((item,index)=>{
+
+    const row=document.createElement("div");
+    row.className="task-row";
+
+    const name=document.createElement("strong");
+    name.textContent=item[0];
+
+    const sel=document.createElement("select");
+    sel.className="field";
+    sel.dataset.index=index;
+
+    let html=
+      `<option value="">اختر الوظيفة</option>`;
+
+    q.options.forEach(o=>{
+      html+=`<option>${o}</option>`;
+    });
+
+    sel.innerHTML=html;
+
+    const saved=S.answers[S.i];
+
+    if(saved && saved[index])
+      sel.value=saved[index];
+
+    if(S.checked[S.i])
+      sel.disabled=true;
+
+    row.appendChild(name);
+    row.appendChild(sel);
+
+    qs("#answerArea").appendChild(row);
+  });
+}
+
+qs("#check").onclick=()=>{
+
+  const q=Q[S.i];
+
+  let answer;
+  let isCorrect=false;
+
+  if(q.type==="text" || q.type==="number"){
+
+    answer=qs("#answerInput").value.trim();
+
+    if(!answer){
+      alert("اكتب إجابتك أولاً.");
+      return;
+    }
+
+    isCorrect=q.validate(answer);
+  }
+
+  if(q.type==="choice"){
+
+    answer=S.answers[S.i];
+
+    if(answer===null){
+      alert("اختر إجابة أولاً.");
+      return;
+    }
+
+    isCorrect=answer===q.correct;
+  }
+
+  if(q.type==="classification"){
+
+    const selects=[
+      ...qs("#answerArea")
+        .querySelectorAll("select")
+    ];
+
+    answer=selects.map(x=>x.value);
+
+    if(answer.some(x=>!x)){
+      alert("أكمل تصنيف جميع الحيوانات أولاً.");
+      return;
+    }
+
+    isCorrect=q.items.every(
+      (item,i)=>answer[i]===item[1]
+    );
+  }
+
+  if(q.type==="matching"){
+
+    const selects=[
+      ...qs("#answerArea")
+        .querySelectorAll("select")
+    ];
+
+    answer=selects.map(x=>x.value);
+
+    if(answer.some(x=>!x)){
+      alert("أكمل جميع المطابقات أولاً.");
+      return;
+    }
+
+    isCorrect=q.items.every(
+      (item,i)=>answer[i]===item[1]
+    );
+  }
+
+  S.answers[S.i]=answer;
+  S.correct[S.i]=isCorrect;
+  S.checked[S.i]=true;
+
+  render();
+};
+
+function showStoredFeedback(q){
+
+  const ok=S.correct[S.i];
+
+  const box=qs("#feedback");
+
+  box.className=
+    "feedback "+(ok?"good":"bad");
+
+  box.innerHTML=
+    ok
+      ?`<b>✅ إجابة صحيحة</b><br>${q.explain}`
+      :`<b>❌ الإجابة غير صحيحة</b><br>${q.explain}`;
+}
+
+qs("#prev").onclick=()=>{
+
+  if(S.i>0){
+    S.i--;
+    render();
+  }
+};
+
+qs("#next").onclick=async()=>{
+
+  if(S.i<Q.length-1){
+
+    S.i++;
+    render();
+
+  }else{
+
+    await finishCompetition();
+  }
+};
+
+function answerToText(index){
+
+  const q=Q[index];
+  const a=S.answers[index];
+
+  if(Array.isArray(a)){
+
+    return q.items.map(
+      (item,i)=>item[0]+": "+a[i]
+    ).join(" | ");
+  }
+
+  if(q.type==="choice"){
+
+    return q.options[a] || "";
+  }
+
+  return String(a ?? "");
+}
+
+async function finishCompetition(){
+
+  const score=
+    S.correct.filter(Boolean).length;
+
+  const payload={
+    student_name:S.name,
+    class_name:S.cls,
+    score:score,
+    total:6,
+
+    q1_answer:answerToText(0),
+    q1_correct:S.correct[0],
+
+    q2_answer:answerToText(1),
+    q2_correct:S.correct[1],
+
+    q3_answer:answerToText(2),
+    q3_correct:S.correct[2],
+
+    q4_answer:answerToText(3),
+    q4_correct:S.correct[3],
+
+    q5_answer:answerToText(4),
+    q5_correct:S.correct[4],
+
+    q6_answer:answerToText(5),
+    q6_correct:S.correct[5]
+  };
+
+  qs("#next").disabled=true;
+  qs("#next").textContent="جاري حفظ النتيجة...";
+
+  try{
+
+    const r=await fetch(
+      CONFIG.SUPABASE_URL+
+      "/rest/v1/student_results_3",
+      {
+        method:"POST",
+        headers:{
+          apikey:CONFIG.SUPABASE_ANON_KEY,
+          "Content-Type":"application/json",
+          Prefer:"return=minimal"
+        },
+        body:JSON.stringify(payload)
+      }
+    );
+
+    if(!r.ok){
+
+      let error={};
+
+      try{
+        error=await r.json();
+      }catch{}
+
+      if(error.code==="23505"){
+
+        alert(
+          "لقد شاركت في مسابقة أبطال TIMSS (3) مسبقًا."
+        );
+
+      }else{
+
+        console.error(error);
+
+        alert(
+          "تعذر حفظ النتيجة حاليًا. سنكمل إعداد قاعدة البيانات في الخطوة التالية."
+        );
+      }
+    }
+
+  }catch(e){
+
+    console.error(e);
+
+    alert(
+      "تعذر الاتصال بقاعدة البيانات."
+    );
+  }
+
+  showResult(score);
+}
+
+function showResult(score){
+
+  show("result");
+
+  qs("#score").textContent=
+    score+" / 6";
+
+  qs("#summary").textContent=
+    S.name+" – الصف "+S.cls;
+
+  let msg="";
+
+  if(score===6)
+    msg="🌟 بطل TIMSS! حققت الدرجة الكاملة.";
+
+  else if(score>=5)
+    msg="🚀 أداء رائع جدًا.. أنت قريب من القمة!";
+
+  else if(score>=3)
+    msg="👏 أداء جيد.. استمر في التدريب والتحدي.";
+
+  else
+    msg="💪 واصل التدريب.. فكل محاولة تقربك من التميز.";
+
+  qs("#resultMsg").textContent=msg;
+}
+</script>
+
+</body>
+</html>
